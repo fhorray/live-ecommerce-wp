@@ -1,0 +1,139 @@
+header {
+  background-color: $brand-white;
+  padding: 1.5rem 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 0.1rem 1rem rgba(#000000, 0.2);
+
+  .container {
+    @include flex(row, space-between, center);
+  }
+
+  .logo {
+    max-width: 19rem;
+  }
+
+  nav {
+    ul {
+      @include flex(row, space-between, center);
+      li {
+        a {
+          position: relative;
+          color: $main-gray;
+          padding: 1.8rem 2rem;
+          transition: all 0.2s ease-in;
+          display: block;
+          &:hover {
+            background-color: #f5f5fa;
+          }
+        }
+      }
+    }
+  }
+  .menu-cta {
+    .menu-hamburguer {
+      display: none;
+      cursor: pointer;
+      z-index: 9999;
+    }
+  }
+
+  // SUBMENU
+  .submenu {
+    position: relative;
+    width: 100%;
+    &-list {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 1.6rem;
+      ul {
+        @include flex(row, center, start);
+        gap: 4rem;
+        padding: 2rem 0;
+        background-color: $brand-blue;
+        li {
+          a {
+            color: $brand-white;
+            padding: 2rem 2rem;
+            transition: all 0.2s ease-in;
+            &:hover {
+              background-color: #00a6d8;
+            }
+          }
+        }
+      }
+    }
+  }
+  .submenu-hidden {
+    display: none;
+  }
+
+  // RESPONSIVE
+  @include responsive(1100px) {
+    nav {
+      ul {
+        display: none;
+        @include flex(column, start, center);
+        background-color: $brand-white;
+        position: fixed;
+        top: 0;
+        left: 65rem;
+        width: 100%;
+        height: 100vh;
+        padding: 0;
+        padding: 10.5rem 0;
+        z-index: -1;
+        transition: all 0.2s ease-in;
+        li {
+          a {
+            position: relative;
+            color: $main-gray;
+            padding: 1.8rem 2rem;
+            transition: all 0.2s ease-in;
+            display: block;
+            text-align: center;
+            &:hover {
+              background-color: #f5f5fa;
+            }
+          }
+        }
+      }
+    }
+
+    .menu-cta {
+      @include flex(row, space-between, center);
+      gap: 4rem;
+      .menu-hamburguer {
+        display: block;
+      }
+    }
+  }
+  @include responsive(530px) {
+    .logo {
+      max-width: 15rem;
+    }
+    .menu-cta {
+      .btn.btn-primary {
+        display: none;
+      }
+    }
+
+    .menu-cta {
+      .menu-hamburguer {
+        max-width: 3rem;
+      }
+    }
+  }
+
+  .js-menu-header.active {
+    z-index: 9999;
+    left: 0;
+    display: block;
+    opacity: 1;
+  }
+}
