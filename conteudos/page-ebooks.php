@@ -3,23 +3,21 @@
 ?>
 <?php get_header( )?>
 
-
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
   <section class="hero">
     <div class="container">
 
       <div class="text">
-        <h1><span>Checklists</span> gratuitos da <br>Live eCommerce!</h1>
-        <p>Plataforma de E-commerce com recursos nativos que possibilitam liberdade e criatividade para sua operação de e-commerce.</p>
+        <h1><?php the_field('titulo') ?></h1>
+        <p><?php the_field('descricao') ?></p>
 
-        <div class="cta-area">
-          <a class="btn btn-secondary" href="#">Solicitar Demonstração</a>
-          <a href="#" class="cta-area-question">Lorem ipsum amet sit dolor?</a>
-        </div>
+        <!-- BOTÃO CTA E LINK -->
+        <?php include( TEMPLATEPATH .'/includes/cta-area.php'); ?>
+
       </div>
 
-      <img class="hero-image" src="<?php echo get_template_directory_uri(  ) ?>/img/hero-image-3.png" alt="Hero Image">
+      <img class="hero-image" src="<?php the_field('imagem_hero') ?>" alt="Hero Image">
 
     </div>
   </section>
@@ -27,60 +25,31 @@
   <section class="conteudos">
     <div class="container">
 
+    <?php if( have_rows('lista') ): ?>
+      <?php while( have_rows('lista') ): the_row(); ?>  
 
-      <div class="conteudo-item">
-        <img class="conteudo-item-image" src="<?php echo get_template_directory_uri(  ) ?>/img/conteudos/image-1.png" alt="Image 1">
+        <?php if( have_rows('items') ): ?>
+          <?php while( have_rows('items') ): the_row(); ?>  
 
-        <div class="text">
-          <h3>Vendas de Final de Ano: <br>seu e-commerce está preparado?</h3>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo</p>
+            <div class="conteudo-item <?php echo get_sub_field('reverse') ? 'reverse' : ''; ?>">
+              <img class="conteudo-item-image" src="<?php the_sub_field('recurso_item_image'); ?>" alt="Imagem do Conteúdo">
 
-          <a class="btn btn-secondary" href="#">Baixe aqui</a>
+              <div class="text">
+                <h3><?php the_sub_field('recurso_item_titulo'); ?></h3>
+                <p><?php the_sub_field('recurso_item_descricao'); ?></p>
 
-        </div>
+                <a class="btn btn-secondary" href="<?php the_sub_field('recurso_item_btn_link'); ?>"><?php the_sub_field('recurso_item_btn_texto'); ?></a>
 
-      </div>
+              </div>
 
-      <div class="conteudo-item reverse">
-        <img class="conteudo-item-image" src="<?php echo get_template_directory_uri(  ) ?>/img/conteudos/image-1.png" alt="Image 1">
+            </div>
 
-        <div class="text">
-          <h3>Vendas de Final de Ano: <br>seu e-commerce está preparado?</h3>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo</p>
+          <?php endwhile; ?>
+        <?php endif; ?>
 
-          <a class="btn btn-secondary" href="#">Baixe aqui</a>
-
-        </div>
-
-      </div>
-
-      <div class="conteudo-item">
-        <img class="conteudo-item-image" src="<?php echo get_template_directory_uri(  ) ?>/img/conteudos/image-1.png" alt="Image 1">
-
-        <div class="text">
-          <h3>Vendas de Final de Ano: <br>seu e-commerce está preparado?</h3>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo</p>
-
-          <a class="btn btn-secondary" href="#">Baixe aqui</a>
-
-        </div>
-
-      </div>
-
-      <div class="conteudo-item reverse">
-        <img class="conteudo-item-image" src="<?php echo get_template_directory_uri(  ) ?>/img/conteudos/image-1.png" alt="Image 1">
-
-        <div class="text">
-          <h3>Vendas de Final de Ano: <br>seu e-commerce está preparado?</h3>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo</p>
-
-          <a class="btn btn-secondary" href="#">Baixe aqui</a>
-
-        </div>
-
-      </div>
-
-
+      <?php endwhile; ?>
+    <?php endif; ?>
+      
     </div>
   </section>
 

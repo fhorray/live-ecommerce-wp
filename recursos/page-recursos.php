@@ -5,7 +5,7 @@
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-<section class="hero">
+  <section class="hero">
     <div class="container">
 
       <div class="text">

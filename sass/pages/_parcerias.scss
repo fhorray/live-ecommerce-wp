@@ -206,7 +206,7 @@
     }
   }
 
-  @include responsive(1100px) {
+  @include responsive(1000px) {
     .container {
       flex-direction: column;
       gap: 5rem;

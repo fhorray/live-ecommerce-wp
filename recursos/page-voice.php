@@ -5,20 +5,19 @@
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-  <section class="hero">
+<section class="hero">
     <div class="container">
 
       <div class="text">
-        <h1><span>Live Voice</span><br></h1>
-        <p>Formato mais avançado de checkout (fechamento) do mercado. Na mesma página e em pouquíssimos passos, seu cliente se cadastra, fecha a compra e faz o pagamento.</p>
+        <h1><?php the_field('titulo') ?></h1>
+        <p><?php the_field('descricao') ?></p>
 
-        <div class="cta-area">
-          <a class="btn btn-secondary" href="#">Solicitar Demonstração</a>
-          <a href="#" class="cta-area-question">Saiba Mais</a>
-        </div>
+        <!-- BOTÃO CTA E LINK -->
+        <?php include( TEMPLATEPATH .'/includes/cta-area.php'); ?>
+
       </div>
 
-      <img class="hero-image" src="<?php echo get_template_directory_uri(  ) ?>/img/hero-image-2.png" alt="Hero Image">
+      <img class="hero-image" src="<?php the_field('imagem_hero') ?>" alt="Hero Image">
 
     </div>
   </section>
@@ -27,60 +26,54 @@
     <div class="container">
 
 
-      <div class="resource-item">
-        <img class="resource-item-image" src="<?php echo get_template_directory_uri(  ) ?>/img/resources/image-01.png" alt="Image 1">
+    <?php if( have_rows('lista') ): ?>
+      <?php while( have_rows('lista') ): the_row(); ?>  
 
-        <div class="text">
-          <h3>Live Voice</h3>
-          <p>O Live Voice otimiza sua loja virtual para pesquisa por voz, coletando e apresentando os produtos com muito mais velocidade e praticidade.</p>
+        <?php if( have_rows('items') ): ?>
+          <?php while( have_rows('items') ): the_row(); ?>  
 
-          <ul>
-            <li>
-              <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
-              <span>Full Banner</span>
-            </li>
-            <li>
-              <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
-              <span>Banner Mobile</span>
-            </li>
-            <li>
-              <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
-              <span>Cores da Loja</span>
-            </li>
-            <li>
-              <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
-              <span>Editor HTML-CSS</span>
-            </li>
-            <li>
-              <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
-              <span>Paginas Extras</span>
-            </li>
-            <li>
-              <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
-              <span>SELOS</span>
-            </li>
-          </ul>
-        </div>
+            <div class="resource-item <?php echo get_sub_field('reverse') ? 'reverse' : ''; ?>">
 
-      </div>
+              <img class="resource-item-image" src="<?php the_sub_field('recurso_item_image'); ?>" alt="Image 1">
+
+              <div class="text">
+                <h3><?php the_sub_field('recurso_item_titulo'); ?></h3>
+                <p><?php the_sub_field('recurso_item_descricao'); ?></p>
+
+                <ul>
+                  <?php if( have_rows('recurso_item_benefits_list') ): ?>
+                    <?php while( have_rows('recurso_item_benefits_list') ): the_row(); ?>
+                      <li>
+                        <img src="<?php echo get_template_directory_uri(  ) ?>/img/plataforma-de-ecommerce/pos-hero/check-i.svg" alt="Check Icon">
+                        <span><?php the_sub_field('recurso_item_benefits_list_text'); ?></span>
+                      </li>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
+                </ul>
+              </div>
+
+            </div>
+  
+          <?php endwhile; ?>
+        <?php endif; ?>
+
+      <?php endwhile; ?>
+    <?php endif; ?>
 
 
       <div class="benefits">
-        <h2>Porque usar busca por voz na sua loja?</h2>
+        <h2><?php the_field('beneficios_titulo'); ?></h2>
 
         <div class="benefits-list">
-          <div class="item">
-            <h5>Nova experiência de compra</h5>
-            <p>Live Voice vai mudar a forma de os clientes buscarem por produtos e de realizarem suas compras, simplificando o processo e tornando-o mais prático.</p>
-          </div>
-          <div class="item">
-            <h5>Recorrencia</h5>
-            <p>Por facilitar o processo de compra, isso faz com que o cliente observe maior vantagem durante sua jornada de compra e, por isso, é mais fácil que seja fidelizado.</p>
-          </div>
-          <div class="item">
-            <h5>Tempo</h5>
-            <p>Os novos hábitos dos consumidores apontam que tempo é muito relevante para eles. Logo, é um grande benefício poder comprar algo por voz enquanto estão realizando outras tarefas.</p>
-          </div>
+
+        <?php if( have_rows('lista_de_beneficios') ): ?>
+          <?php while( have_rows('lista_de_beneficios') ): the_row(); ?>  
+            <div class="item">
+              <h5><?php the_sub_field('lista_de_beneficios_titulo'); ?></h5>
+              <p><?php the_sub_field('lista_de_beneficios_descricao'); ?></p>
+            </div>
+          <?php endwhile; ?>
+        <?php endif; ?>          
         </div>
       </div>
 
